@@ -2,4 +2,4 @@ from django.shortcuts import render
 from django.http import HttpResponse
 # Create your views here.
 def index(request):
-    return HttpResponse("I am a index page of student side")
+    return render(request,'pmsStudent/index.html')
