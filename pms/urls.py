@@ -24,5 +24,6 @@ urlpatterns = [
     path("pmsMain/",include('pmsMain.urls')),
     path("pmsMentor/",include('pmsMentor.urls')),
     path("pmsStudent/",include('pmsStudent.urls')),
+    path("pmsTeam/",include('pmsTeam.urls')),
     path("",views.index),
 ]+static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
