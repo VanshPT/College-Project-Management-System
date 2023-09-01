@@ -7,3 +7,9 @@
     align-items: center;
     justify-content: space-evenly;
 }
+
+
+.bgs-dark {
+    
+    background-color:  rgb(13, 85, 107)!important;
+}

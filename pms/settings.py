@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "pmsMain",
     "pmsStudent",
-    "pmsMentor"
+    "pmsMentor",
+    "pmsTeam"
 ]
 
 MIDDLEWARE = [

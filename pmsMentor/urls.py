@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views
+from pmsMain.models import Mentor
 urlpatterns = [
-    path("",views.index,name="MentorHome"),
+    path("<str:roll_no>/",views.index,name="MentorHome"),
 ]
