@@ -38,7 +38,7 @@ document.getElementById('sign-in-btn').addEventListener('click', function() {
   attempts_left = attempts_left - 1;
   sessionStorage.setItem('attempts', attempts_left);
 
-  if (attempts_left === 0) {
+  if (attempts_left < 0) {
     alert('Maximum login attempts reached. Please contact support.');
     attempts_left=5;
     sessionStorage.setItem('attempts', attempts_left);

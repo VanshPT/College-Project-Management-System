@@ -1,5 +1,87 @@
 {% extends 'pmsMain/basic.html' %}
-{% block title %}Mentor Dashboard | PMS{% endblock %}
-{% block css %}{% endblock %}
-{% block body %}{% endblock %}
+{% block title %}Student Dashboard | PMS{% endblock %}
+{% block css %}
+#sec1{
+    display:flex;
+    flex-direction:column;
+    justify-content: center;
+    align-items:flex-end;
+    padding:2rem;
+    margin-right:2rem;
+}
+#first{
+    font-size:3.5rem;
+    padding-right:0.5rem;
+    font-family: 'EB Garamond', serif;
+    color:rgb(13, 85, 107);
+}
+#last{
+    font-size:3.5rem;
+    font-family: 'EB Garamond', serif;
+    color:rgb(40, 146, 178);
+}
+#roll{
+    color:#ffc107;
+    font-size:2rem;
+    font-weight:bold;
+}
+#department{
+    color:#ffc107;
+    font-size:2rem;
+}
+#join_team{
+    margin-top:4rem;
+    padding-left:2rem;
+    padding-right:2rem;
+}
+#sec2{
+    margin-left:2rem;
+}
+.project_heading{
+    color:rgb(40, 146, 178);
+    font-size:2.5rem;
+}
+.line_brk{
+    margin-right:30rem;
+    color:rgb(13, 85, 107);
+    border-top: 2px solid rgb(13, 85, 107);
+}
+.sep{
+    margin-bottom:2rem;
+}
+{% endblock %}
+{% block body %}
+<div id="sec1">
+    <div id="stud_name">
+        <span id="first">{{student.first_name}}</span>
+        <span id="last">{{student.last_name}}</span>
+    </div>
+    <div id="roll_branch">
+        <span id="team_name">{{student.team}}</span>
+        <span id="roll">{{student.roll_no}}</span>
+        <span id="department">{{student.department}}</span>
+    </div>
+    <div id="butt">
+        <button class="btn btn-outline-danger" id="join_team">
+            Join Team
+        </button>
+    </div>
+</div>
+<div id="sec2">
+    <div class="sep">
+        <h4 class="project_heading">Ongoing Projects</h4>
+        <hr class="line_brk">
+        <div class="project_list">
+            <button class="btn btn-outline-success" id="add_project"><strong>&#43;</strong> Add Project</button>
+        </div>
+    </div>
+    <div class="sep">
+        <h4 class="project_heading">Previous Projects</h4>
+        <hr class="line_brk">
+        <div class="project_list">
+            <button class="btn btn-outline-success" id="add_project"><strong>&#43;</strong> Add Project</button>
+        </div>
+    </div>
+</div>
+{% endblock %}
 {% block js %}{% endblock %}
