@@ -49,8 +49,22 @@
 .sep{
     margin-bottom:2rem;
 }
+#proj_tit{
+    text-decoration:underline;
+    color:green;
+}
+.proj-details-container {
+  margin-left: -2rem;
+  border: 1px solid blue;
+  border-radius: 5px;
+  padding: 20px;
+}
+.sec3{
+  margin-left:2rem;
+}
 {% endblock %}
 {% block body %}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <div id="sec1">
     <div id="stud_name">
         <span id="first">{{student.first_name}}</span>
@@ -72,16 +86,263 @@
         <h4 class="project_heading">Ongoing Projects</h4>
         <hr class="line_brk">
         <div class="project_list">
-            <button class="btn btn-outline-success" id="add_project"><strong>&#43;</strong> Add Project</button>
+           
+<button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    <strong>&#43;</strong> Add Project
+  </button>
+
+  <!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Add Project</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
+        <div class="modal-body">
+          <form action="/pmsStudent/{{student.roll_no}}/" method="post">{% csrf_token %}
+            <div class="mb-3">
+                <label for="projectName" class="form-label">Project Name</label>
+                <input type="text" class="form-control" id="projectName" name="projectName" required>
+              </div>
+    
+        
+              <div class="mb-3">
+                <label for="teamMembers" class="form-label">Team Members</label>
+                <div class="row">
+                    <div class="col">
+                        <input type="text" class="form-control" placeholder="Member 1" name="member1">
+                    </div>
+                    <div class="col">
+                        <input type="text" class="form-control" placeholder="Member 2" name="member2">
+                    </div>
+                    <div class="col">
+                        <input type="text" class="form-control" placeholder="Member 3" name="member3">
+                    </div>
+                    <div class="col">
+                        <input type="text" class="form-control" placeholder="Member 4" name="member4">
+                    </div>
+                </div>
+            </div>
+    
+              <div class="mb-3">
+                <label for="projectDescription" class="form-label">Project Description</label>
+                <textarea class="form-control" id="projectDescription" name="projectDescription" rows="4" required></textarea>
+              </div>
+    
+      
+              <div class="mb-3">
+                <label for="githubLink" class="form-label">GitHub Link</label>
+                <input type="url" class="form-control" id="githubLink" name="githubLink" required>
+              </div>
+    
+        
+              <!-- <div class="mb-3">
+                <label for="additionalField" class="form-label">Additional Field</label>
+                <input type="text" class="form-control" id="additionalField" name="additionalField">
+                <small class="form-text text-muted">Optional additional field.</small>
+              </div> -->
+    
+              <div class="mb-3">
+                <label class="form-label">Project Type</label>
+                <input type="hidden" name="roll_no" value="{{student.roll_no}}">
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="projectType" id="proj_type" value="full_year">
+                  <label class="form-check-label" for="proj_type">Full Year Project</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="projectType" id="proj_type" value="semester">
+                  <label class="form-check-label" for="proj_type">Semester Project</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="projectType" id="proj_type" value="personal">
+                  <label class="form-check-label" for="proj_type">Personal Project</label>
+                </div>
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label">Project Semesters</label>
+                <div class="d-flex flex-wrap">
+                    <div class="form-check me-3">
+                        <input class="form-check-input" type="checkbox" id="semester1" name="semester1">
+                        <label class="form-check-label" for="semester1">1</label>
+                    </div>
+                    <div class="form-check me-3">
+                        <input class="form-check-input" type="checkbox" id="semester2" name="semester2">
+                        <label class="form-check-label" for="semester2">2</label>
+                    </div>
+                    <div class="form-check me-3">
+                        <input class="form-check-input" type="checkbox" id="semester3" name="semester3">
+                        <label class="form-check-label" for="semester3">3</label>
+                    </div>
+                    <div class="form-check me-3">
+                        <input class="form-check-input" type="checkbox" id="semester4" name="semester4">
+                        <label class="form-check-label" for="semester4">4</label>
+                    </div>
+                    <div class="form-check me-3">
+                        <input class="form-check-input" type="checkbox" id="semester5" name="semester5">
+                        <label class="form-check-label" for="semester5">5</label>
+                    </div>
+                    <div class="form-check me-3">
+                        <input class="form-check-input" type="checkbox" id="semester6" name="semester6">
+                        <label class="form-check-label" for="semester6">6</label>
+                    </div>
+                    <div class="form-check me-3">
+                        <input class="form-check-input" type="checkbox" id="semester7" name="semester7">
+                        <label class="form-check-label" for="semester7">7</label>
+                    </div>
+                    <div class="form-check me-3">
+                        <input class="form-check-input" type="checkbox" id="semester8" name="semester8">
+                        <label class="form-check-label" for="semester8">8</label>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Start Date -->
+            <div class="mb-3">
+                <label for="startDate" class="form-label">Start Date</label>
+                <input type="date" class="form-control" id="startDate" name="startDate" required>
+            </div>
+            
+            <!-- End Date -->
+            <div class="mb-3">
+                <label for="endDate" class="form-label">End Date</label>
+                <input type="date" class="form-control" id="endDate" name="endDate" required>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-outline-warning">Save</button>
+        </form>
+        </div>
+      </div>
+    </div>
+  </div>
+        </div>
+        <div class="sec3">
+        <div class="container mt-5 proj-details-container">
+          <div class="row">
+              <div class="col-md-6 offset-md-3">
+                  <h2>Project Details</h2>
+                  <hr>
+        
+                  <!-- Display Form Data -->
+                  <dl class="row">
+                      <dt class="col-sm-4">Project Name:</dt>
+                      <dd class="col-sm-8">Sample Project</dd>
+        
+                      <dt class="col-sm-4">Team Members:</dt>
+                      <dd class="col-sm-8">
+                          Member 1, Member 2, Member 3, Member 4
+                      </dd>
+        
+                      <dt class="col-sm-4">Project Description:</dt>
+                      <dd class="col-sm-8">
+                          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vitae lorem at ipsum placerat cursus.
+                      </dd>
+        
+                      <dt class="col-sm-4">GitHub Link:</dt>
+                      <dd class="col-sm-8">
+                          <a href="https://github.com/example">https://github.com/example</a>
+                      </dd>
+        
+                      <dt class="col-sm-4">Additional Field:</dt>
+                      <dd class="col-sm-8">Optional field value</dd>
+        
+                      <dt class="col-sm-4">Project Type:</dt>
+                      <dd class="col-sm-8">Full Year Project</dd>
+        
+                      <dt class="col-sm-4">Project Semesters:</dt>
+                      <dd class="col-sm-8">
+                          Semesters 1, 2
+                      </dd>
+        
+                      <dt class="col-sm-4">Start Date:</dt>
+                      <dd class="col-sm-8">2023-09-01</dd>
+        
+                      <dt class="col-sm-4">End Date:</dt>
+                      <dd class="col-sm-8">2024-05-31</dd>
+                  </dl>
+        
+                  <a href="#" class="btn btn-outline-success">Edit</a>
+              </div>
+          </div>
+        </div>
+        <br>
+      </div>
+        
     </div>
     <div class="sep">
         <h4 class="project_heading">Previous Projects</h4>
         <hr class="line_brk">
         <div class="project_list">
-            <button class="btn btn-outline-success" id="add_project"><strong>&#43;</strong> Add Project</button>
+            <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <strong>&#43;</strong> Add Project
+              </button>
+      <!-- same modal works as of ongoing projects as data-bs target specifies same modalid there -->
+    </div>
+</div>
+<div class="sec3">
+  <!-- ------------------------------------------------------------------------------ -->
+  <div class="container mt-5 proj-details-container">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <h2>Project Details</h2>
+            <hr>
+
+            <!-- Display Form Data -->
+            <dl class="row">
+                <dt class="col-sm-4">Project Name:</dt>
+                <dd class="col-sm-8">Sample Project</dd>
+
+                <dt class="col-sm-4">Team Members:</dt>
+                <dd class="col-sm-8">
+                    Member 1, Member 2, Member 3, Member 4
+                </dd>
+
+                <dt class="col-sm-4">Project Description:</dt>
+                <dd class="col-sm-8">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vitae lorem at ipsum placerat cursus.
+                </dd>
+
+                <dt class="col-sm-4">GitHub Link:</dt>
+                <dd class="col-sm-8">
+                    <a href="https://github.com/example">https://github.com/example</a>
+                </dd>
+
+                <dt class="col-sm-4">Additional Field:</dt>
+                <dd class="col-sm-8">Optional field value</dd>
+
+                <dt class="col-sm-4">Project Type:</dt>
+                <dd class="col-sm-8">Full Year Project</dd>
+
+                <dt class="col-sm-4">Project Semesters:</dt>
+                <dd class="col-sm-8">
+                    Semesters 1, 2
+                </dd>
+
+                <dt class="col-sm-4">Start Date:</dt>
+                <dd class="col-sm-8">2023-09-01</dd>
+
+                <dt class="col-sm-4">End Date:</dt>
+                <dd class="col-sm-8">2024-05-31</dd>
+            </dl>
+
+            <a href="#" class="btn btn-outline-success">Edit</a>
         </div>
     </div>
 </div>
+<br>
+
+</div>
 {% endblock %}
-{% block js %}{% endblock %}
+{% block js %}
+$(document).ready(function () {
+    $('[data-bs-toggle="popover"]').popover();
+  });
+
+  $(document).ready(function () {
+    var hiddenFormContent = $('#hidden-form').html();
+    $('#hidden-form-content').html(hiddenFormContent);
+});
+{% endblock %}
