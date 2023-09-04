@@ -65,6 +65,11 @@
 {% endblock %}
 {% block body %}
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+{% if error_message %}
+<div class="alert alert-danger">
+    {{ error_message }}
+</div>
+{% endif %}
 <div id="sec1">
     <div id="stud_name">
         <span id="first">{{student.first_name}}</span>
@@ -101,6 +106,7 @@
         </div>
         <div class="modal-body">
           <form action="/pmsStudent/{{student.roll_no}}/" method="post">{% csrf_token %}
+            <input type="hidden" name="rollno" value="{{student.roll_no}}">
             <div class="mb-3">
                 <label for="projectName" class="form-label">Project Name</label>
                 <input type="text" class="form-control" id="projectName" name="projectName" required>
@@ -108,19 +114,19 @@
     
         
               <div class="mb-3">
-                <label for="teamMembers" class="form-label">Team Members</label>
+                <label for="teamMembers" class="form-label">Team Roll Number</label>
                 <div class="row">
                     <div class="col">
-                        <input type="text" class="form-control" placeholder="Member 1" name="member1">
+                        <input type="number" class="form-control" placeholder="Member 1" name="member1">
                     </div>
                     <div class="col">
-                        <input type="text" class="form-control" placeholder="Member 2" name="member2">
+                        <input type="number" class="form-control" placeholder="Member 2" name="member2">
                     </div>
                     <div class="col">
-                        <input type="text" class="form-control" placeholder="Member 3" name="member3">
+                        <input type="number" class="form-control" placeholder="Member 3" name="member3">
                     </div>
                     <div class="col">
-                        <input type="text" class="form-control" placeholder="Member 4" name="member4">
+                        <input type="number" class="form-control" placeholder="Member 4" name="member4">
                     </div>
                 </div>
             </div>
@@ -143,9 +149,9 @@
                 <small class="form-text text-muted">Optional additional field.</small>
               </div> -->
     
+              
               <div class="mb-3">
                 <label class="form-label">Project Type</label>
-                <input type="hidden" name="roll_no" value="{{student.roll_no}}">
                 <div class="form-check">
                   <input class="form-check-input" type="radio" name="projectType" id="proj_type" value="full_year">
                   <label class="form-check-label" for="proj_type">Full Year Project</label>
