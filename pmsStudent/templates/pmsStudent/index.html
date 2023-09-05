@@ -92,7 +92,7 @@
         <hr class="line_brk">
         <div class="project_list">
            
-<button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
+<button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#exampleModal" id="ongoing-projects">
     <strong>&#43;</strong> Add Project
   </button>
 
@@ -153,15 +153,15 @@
               <div class="mb-3">
                 <label class="form-label">Project Type</label>
                 <div class="form-check">
-                  <input class="form-check-input" type="radio" name="projectType" id="proj_type" value="full_year">
+                  <input class="form-check-input" type="radio" name="projectType" value="full_year">
                   <label class="form-check-label" for="proj_type">Full Year Project</label>
                 </div>
                 <div class="form-check">
-                  <input class="form-check-input" type="radio" name="projectType" id="proj_type" value="semester">
+                  <input class="form-check-input" type="radio" name="projectType" value="semester">
                   <label class="form-check-label" for="proj_type">Semester Project</label>
                 </div>
                 <div class="form-check">
-                  <input class="form-check-input" type="radio" name="projectType" id="proj_type" value="personal">
+                  <input class="form-check-input" type="radio" name="projectType" value="personal">
                   <label class="form-check-label" for="proj_type">Personal Project</label>
                 </div>
               </div>
@@ -215,6 +215,8 @@
                 <label for="endDate" class="form-label">End Date</label>
                 <input type="date" class="form-control" id="endDate" name="endDate" required>
             </div>
+            <input type="hidden" id="project-status" name="projectStatus">
+
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
@@ -226,6 +228,8 @@
   </div>
         </div>
         <div class="sec3">
+
+            
         <div class="container mt-5 proj-details-container">
           <div class="row">
               <div class="col-md-6 offset-md-3">
@@ -282,7 +286,7 @@
         <h4 class="project_heading">Previous Projects</h4>
         <hr class="line_brk">
         <div class="project_list">
-            <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#exampleModal" id="previous-projects">
                 <strong>&#43;</strong> Add Project
               </button>
       <!-- same modal works as of ongoing projects as data-bs target specifies same modalid there -->
@@ -290,6 +294,7 @@
 </div>
 <div class="sec3">
   <!-- ------------------------------------------------------------------------------ -->
+  
   <div class="container mt-5 proj-details-container">
     <div class="row">
         <div class="col-md-6 offset-md-3">
@@ -343,12 +348,14 @@
 </div>
 {% endblock %}
 {% block js %}
-$(document).ready(function () {
-    $('[data-bs-toggle="popover"]').popover();
-  });
-
-  $(document).ready(function () {
-    var hiddenFormContent = $('#hidden-form').html();
-    $('#hidden-form-content').html(hiddenFormContent);
+$('#ongoing-projects').click(function() {
+    $('#project-status').val('O');
+    console.log($('#project-status').val());
 });
+
+$('#previous-projects').click(function() {
+    $('#project-status').val('P');
+    console.log($('#project-status').val());
+});
+
 {% endblock %}

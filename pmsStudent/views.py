@@ -50,6 +50,8 @@ def index(request,roll_no):
         for j in roll_numbers:
             roll.append(j['roll_no'])
             
+        project_status=request.POST.get('projectStatus')
+        print(project_status)
         if (team_member1 not in roll) or (team_member2 not in roll) or (team_member3 not in roll) or (team_member4 not in roll) or (roll_number not in roll):
             error_message = "Invalid roll numbers for team members or project creator."
             print(error_message)
@@ -67,9 +69,16 @@ def index(request,roll_no):
         project_semesters=semester_values,
         start_date=start_date,
         end_date=end_date,
+        project_status=project_status,
         )
         projects.save()
     
 
     # retrieval of data from database and show on web page code below
-    return render(request, 'pmsStudent/index.html', {'student': student_user})
+        student_roll = Student.objects.get(roll_no=roll_no)
+        projects_p = Project.objects.filter(project_status='P', roll_no=student_roll)
+        print(projects_p)
+
+        projects_o = Project.objects.filter(project_status='O', roll_no=student_roll)
+        print(projects_o)
+    return render(request, 'pmsStudent/index.html', {'student': student_user,'projects_p':projects_p, 'projects_o':projects_o})

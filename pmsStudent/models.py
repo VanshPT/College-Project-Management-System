@@ -26,6 +26,16 @@ class Project(models.Model):
     project_semesters = models.CharField(max_length=50)
     start_date = models.DateField()
     end_date = models.DateField()
+    PROJECT_STATUS_TYPES = [
+        ('O', 'Ongoing'),
+        ('P', 'Previous')
+    ]
+    project_status = models.CharField(
+        max_length=1,
+        choices=PROJECT_STATUS_TYPES,
+        null=True,
+        blank=True
+    )
 
     def __str__(self):
         return self.project_name
