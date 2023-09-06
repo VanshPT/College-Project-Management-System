@@ -229,7 +229,7 @@
         </div>
         <div class="sec3">
 
-            
+        {% for i in projects_o %}
         <div class="container mt-5 proj-details-container">
           <div class="row">
               <div class="col-md-6 offset-md-3">
@@ -239,39 +239,46 @@
                   <!-- Display Form Data -->
                   <dl class="row">
                       <dt class="col-sm-4">Project Name:</dt>
-                      <dd class="col-sm-8">Sample Project</dd>
+                      <dd class="col-sm-8">{{i.project_name}}</dd>
         
                       <dt class="col-sm-4">Team Members:</dt>
                       <dd class="col-sm-8">
-                          Member 1, Member 2, Member 3, Member 4
+                          {{i.member1}}, {{i.member2}}, {{i.member3}}, {{i.member4}}
                       </dd>
         
                       <dt class="col-sm-4">Project Description:</dt>
                       <dd class="col-sm-8">
-                          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vitae lorem at ipsum placerat cursus.
+                          {{i.project_description}}
                       </dd>
         
                       <dt class="col-sm-4">GitHub Link:</dt>
                       <dd class="col-sm-8">
-                          <a href="https://github.com/example">https://github.com/example</a>
+                          <a href="{{i.github_link}}">{{i.github_link}}</a>
                       </dd>
         
-                      <dt class="col-sm-4">Additional Field:</dt>
-                      <dd class="col-sm-8">Optional field value</dd>
-        
+                      {% if i.project_type == "full_year" %}
                       <dt class="col-sm-4">Project Type:</dt>
                       <dd class="col-sm-8">Full Year Project</dd>
-        
+                      {% endif %}
+                      {% if i.project_type == "semester" %}
+                      <dt class="col-sm-4">Project Type:</dt>
+                      <dd class="col-sm-8">Semester Project</dd>
+                      {% endif %}
+                      {% if i.project_type == "personal" %}
+                      <dt class="col-sm-4">Project Type:</dt>
+                      <dd class="col-sm-8">Personal project</dd>
+                      {% endif %}
+                      
                       <dt class="col-sm-4">Project Semesters:</dt>
                       <dd class="col-sm-8">
-                          Semesters 1, 2
+                          {{i.project_semesters}}
                       </dd>
         
                       <dt class="col-sm-4">Start Date:</dt>
-                      <dd class="col-sm-8">2023-09-01</dd>
+                      <dd class="col-sm-8">{{i.start_date}}</dd>
         
                       <dt class="col-sm-4">End Date:</dt>
-                      <dd class="col-sm-8">2024-05-31</dd>
+                      <dd class="col-sm-8">{{i.end_date}}</dd>
                   </dl>
         
                   <a href="#" class="btn btn-outline-success">Edit</a>
@@ -279,6 +286,7 @@
           </div>
         </div>
         <br>
+        {% endfor %}
       </div>
         
     </div>
@@ -294,57 +302,64 @@
 </div>
 <div class="sec3">
   <!-- ------------------------------------------------------------------------------ -->
-  
+  {% for i in projects_p %}
   <div class="container mt-5 proj-details-container">
     <div class="row">
         <div class="col-md-6 offset-md-3">
             <h2>Project Details</h2>
             <hr>
-
+  
             <!-- Display Form Data -->
             <dl class="row">
                 <dt class="col-sm-4">Project Name:</dt>
-                <dd class="col-sm-8">Sample Project</dd>
-
+                <dd class="col-sm-8">{{i.project_name}}</dd>
+  
                 <dt class="col-sm-4">Team Members:</dt>
                 <dd class="col-sm-8">
-                    Member 1, Member 2, Member 3, Member 4
+                    {{i.member1}}, {{i.member2}}, {{i.member3}}, {{i.member4}}
                 </dd>
-
+  
                 <dt class="col-sm-4">Project Description:</dt>
                 <dd class="col-sm-8">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vitae lorem at ipsum placerat cursus.
+                    {{i.project_description}}
                 </dd>
-
+  
                 <dt class="col-sm-4">GitHub Link:</dt>
                 <dd class="col-sm-8">
-                    <a href="https://github.com/example">https://github.com/example</a>
+                    <a href="{{i.github_link}}">{{i.github_link}}</a>
                 </dd>
-
-                <dt class="col-sm-4">Additional Field:</dt>
-                <dd class="col-sm-8">Optional field value</dd>
-
+  
+                {% if i.project_type == "full_year" %}
                 <dt class="col-sm-4">Project Type:</dt>
                 <dd class="col-sm-8">Full Year Project</dd>
-
+                {% endif %}
+                {% if i.project_type == "semester" %}
+                <dt class="col-sm-4">Project Type:</dt>
+                <dd class="col-sm-8">Semester Project</dd>
+                {% endif %}
+                {% if i.project_type == "personal" %}
+                <dt class="col-sm-4">Project Type:</dt>
+                <dd class="col-sm-8">Personal project</dd>
+                {% endif %}
+                
                 <dt class="col-sm-4">Project Semesters:</dt>
                 <dd class="col-sm-8">
-                    Semesters 1, 2
+                    {{i.project_semesters}}
                 </dd>
-
+  
                 <dt class="col-sm-4">Start Date:</dt>
-                <dd class="col-sm-8">2023-09-01</dd>
-
+                <dd class="col-sm-8">{{i.start_date}}</dd>
+  
                 <dt class="col-sm-4">End Date:</dt>
-                <dd class="col-sm-8">2024-05-31</dd>
+                <dd class="col-sm-8">{{i.end_date}}</dd>
             </dl>
-
+  
             <a href="#" class="btn btn-outline-success">Edit</a>
         </div>
     </div>
-</div>
-<br>
-
+  </div>
+  <br>
+{% endfor %}
 </div>
 {% endblock %}
 {% block js %}

@@ -13,7 +13,6 @@ def index(request,roll_no):
             student_instance = Student.objects.get(roll_no=roll_number)
         except Student.DoesNotExist:
             error_message = "Invalid roll number for project creator."
-            print(error_message)
             return render(request, 'pmsStudent/index.html', {'student': student_user, 'error_message': error_message})
 
         project_name=request.POST.get('projectName')
@@ -30,7 +29,6 @@ def index(request,roll_no):
             student_member4 = Student.objects.get(roll_no=team_member4)
         except Student.DoesNotExist:
             error_message = "Invalid roll numbers for team members."
-            print(error_message)
             return render(request, 'pmsStudent/index.html', {'student': student_user, 'error_message': error_message})
 
         project_desc=request.POST.get('projectDescription','')
@@ -51,11 +49,12 @@ def index(request,roll_no):
             roll.append(j['roll_no'])
             
         project_status=request.POST.get('projectStatus')
-        print(project_status)
         if (team_member1 not in roll) or (team_member2 not in roll) or (team_member3 not in roll) or (team_member4 not in roll) or (roll_number not in roll):
             error_message = "Invalid roll numbers for team members or project creator."
-            print(error_message)
-            return render(request, 'pmsStudent/index.html', {'student': student_user, 'error_message': error_message})
+            student_roll = Student.objects.get(roll_no=roll_no)
+            projects_p = Project.objects.filter(project_status='P', roll_no=student_roll)
+            projects_o = Project.objects.filter(project_status='O', roll_no=student_roll)
+            return render(request, 'pmsStudent/index.html', {'student': student_user, 'error_message': error_message, 'projects_p':projects_p, 'projects_o':projects_o})
         projects = Project(
         roll_no=student_instance,
         project_name=project_name,
@@ -75,10 +74,11 @@ def index(request,roll_no):
     
 
     # retrieval of data from database and show on web page code below
-        student_roll = Student.objects.get(roll_no=roll_no)
-        projects_p = Project.objects.filter(project_status='P', roll_no=student_roll)
-        print(projects_p)
+    student_roll = Student.objects.get(roll_no=roll_no)
+    projects_p = Project.objects.filter(project_status='P', roll_no=student_roll)
+    # print(projects_p)
 
-        projects_o = Project.objects.filter(project_status='O', roll_no=student_roll)
-        print(projects_o)
+    projects_o = Project.objects.filter(project_status='O', roll_no=student_roll)
+    # print(projects_o)
+        
     return render(request, 'pmsStudent/index.html', {'student': student_user,'projects_p':projects_p, 'projects_o':projects_o})
